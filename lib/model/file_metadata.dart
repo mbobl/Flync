@@ -5,7 +5,7 @@ part 'file_metadata.freezed.dart';
 part 'file_metadata.g.dart';
 
 @freezed
-class FileMetadata with _$FileMetadata {
+abstract class FileMetadata with _$FileMetadata {
   const factory FileMetadata({
     required String name,
     required int size,

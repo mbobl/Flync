@@ -9,12 +9,12 @@ class SyncGroupsCountNotifier extends ValueNotifier<int> {
     _initialize();
   }
 
-  _initialize() async {
+  void _initialize() {
     _onDataChange();
     _persistenceService.addOnChangeListener(_onDataChange);
   }
 
-  _onDataChange() async {
+  void _onDataChange() {
     value = _persistenceService.count();
   }
 }

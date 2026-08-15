@@ -22,7 +22,7 @@ class StorageConfigPageManager {
 
   bool canSave(int step) => step >= 2;
 
-  submit(GlobalKey<FormBuilderState> formKey, int step) async {
+  Future<void> submit(GlobalKey<FormBuilderState> formKey, int step) async {
     final state = formKey.currentState!;
     final context = formKey.currentContext!;
     if (!state.validate()) return;
@@ -34,14 +34,14 @@ class StorageConfigPageManager {
     }
   }
 
-  localDirectoryPicker(BuildContext context) async {
-    String? result = await FilePicker.platform.getDirectoryPath();
+  Future<void> localDirectoryPicker(BuildContext context) async {
+    String? result = await FilePicker.getDirectoryPath();
     if (result != null && context.mounted) {
       FormBuilder.of(context)?.fields['directory']?.didChange(result);
     }
   }
 
-  _finalizeForm(
+  void _finalizeForm(
     StorageConfig config,
     BuildContext context,
     int step,
@@ -109,7 +109,7 @@ class StorageConfigPageManager {
     return null;
   }
 
-  _saveAndSync(SyncGroup group) async {
+  Future<void> _saveAndSync(SyncGroup group) async {
     int id = await _persistenceService.add(group);
     final result = await _syncService.synchronize(group);
     _persistenceService.set(id, result);

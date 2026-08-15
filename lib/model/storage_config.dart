@@ -5,7 +5,7 @@ part 'storage_config.freezed.dart';
 part 'storage_config.g.dart';
 
 @freezed
-class StorageConfig with _$StorageConfig {
+abstract class StorageConfig with _$StorageConfig {
   const factory StorageConfig({
     required StorageSource source,
     String? hostname,

@@ -7,12 +7,12 @@ import 'package:go_router/go_router.dart';
 class StorageSourceSelectPage extends StatelessWidget {
   final int step;
 
-  _openInfoDialog(BuildContext context) => showDialog<bool>(
+  Future<bool?> _openInfoDialog(BuildContext context) => showDialog<bool>(
     context: context,
     builder: (context) => SourceHelpDialog(),
   );
 
-  _navigateToStorageConfig(BuildContext context, String sourceName) =>
+  void _navigateToStorageConfig(BuildContext context, String sourceName) =>
       context.push('/storage-config/$step/$sourceName');
 
   const StorageSourceSelectPage({super.key, required this.step});

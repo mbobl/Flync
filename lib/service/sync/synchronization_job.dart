@@ -20,7 +20,7 @@ class SynchronizationJob {
       _protocol2 = group.configs[1].source.client(config: group.configs[1]),
       _fileSnapshot = group.fileSnapshot ?? {};
 
-  synchronize() async {
+  Future<void> synchronize() async {
     await _protocol1.connect();
     await _protocol2.connect();
 
@@ -107,7 +107,7 @@ class SynchronizationJob {
   }
 
   //TODO: Handle backups
-  _handleAction(FileAction fileAction) async {
+  Future<void> _handleAction(FileAction fileAction) async {
     var name = fileAction.metadata.name;
 
     if (fileAction.type == ActionType.delete) {
@@ -124,7 +124,7 @@ class SynchronizationJob {
     }
   }
 
-  _matchModifyTimeIfPossible(
+  Future<void> _matchModifyTimeIfPossible(
     StorageClientService protocol,
     String fileName,
     DateTime modified,
@@ -168,7 +168,9 @@ class SynchronizationJob {
     );
   }
 
-  Future<Set<FileMetadata>> _getFilesWithConnection(protocol) async {
+  Future<Set<FileMetadata>> _getFilesWithConnection(
+    StorageClientService protocol,
+  ) async {
     await protocol.connect();
     var result = await protocol.getFiles();
     await protocol.disconnect();

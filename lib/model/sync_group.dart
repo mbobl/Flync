@@ -6,7 +6,7 @@ part 'sync_group.freezed.dart';
 part 'sync_group.g.dart';
 
 @freezed
-class SyncGroup with _$SyncGroup {
+abstract class SyncGroup with _$SyncGroup {
   const factory SyncGroup({
     required List<StorageConfig> configs,
     required SyncStatus status,

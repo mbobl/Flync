@@ -19,13 +19,13 @@ class HomePageManager {
     _retryInProgressSyncs();
   }
 
-  onClickSync(int groupId) async {
+  Future<void> onClickSync(int groupId) async {
     var group = _persistenceService.get(groupId);
     if (group == null || group.status == SyncStatus.inProgress) return;
     await _sync(groupId, group);
   }
 
-  onClickDelete(BuildContext context, int groupId) async {
+  Future<void> onClickDelete(BuildContext context, int groupId) async {
     HapticFeedback.vibrate();
     final group = _persistenceService.get(groupId);
     if (group == null) return;
@@ -35,18 +35,18 @@ class HomePageManager {
     await _persistenceService.remove(groupId);
   }
 
-  setSearchQuery(String query) {
+  void setSearchQuery(String query) {
     syncGroupsNotifier.searchQuery = query;
   }
 
-  _retryInProgressSyncs() {
+  void _retryInProgressSyncs() {
     _persistenceService
         .getAll()
         .filterValues((group) => group.status == SyncStatus.inProgress)
         .forEach(_sync);
   }
 
-  _sync(int id, SyncGroup group) async {
+  Future<void> _sync(int id, SyncGroup group) async {
     group = group.copyWith(syncCount: group.syncCount + 1);
     await _persistenceService.set(
       id,
@@ -62,7 +62,7 @@ class HomePageManager {
     await _persistenceService.set(id, result);
   }
 
-  _getUndoSnackbar(SyncGroup group) => SnackBar(
+  SnackBar _getUndoSnackbar(SyncGroup group) => SnackBar(
     content: const Text('Deleting...'),
     action: SnackBarAction(
       label: 'Undo',

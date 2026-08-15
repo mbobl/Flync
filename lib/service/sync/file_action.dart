@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'file_action.freezed.dart';
 
 @freezed
-class FileAction with _$FileAction {
+abstract class FileAction with _$FileAction {
   @Assert(
     'type != ActionType.copy || to != null',
     'both sides of the connection must be specified when copying file',

@@ -37,7 +37,7 @@ class FtpClient implements StorageClientService {
     await _session.connect();
 
     _session.listCommand =
-        ListCommand.LIST; //TODO: Try which is supported by server
+        ListCommand.list; //TODO: Try which is supported by server
     if (config.directory != null) {
       await _session.changeDirectory(config.directory!);
     }
@@ -48,7 +48,7 @@ class FtpClient implements StorageClientService {
     return _session.listDirectoryContent().then(
       (c) =>
           c
-              .where((e) => e.type == FTPEntryType.FILE)
+              .where((e) => e.type == FTPEntryType.file)
               .map(
                 (f) => FileMetadata(
                   name: f.name,

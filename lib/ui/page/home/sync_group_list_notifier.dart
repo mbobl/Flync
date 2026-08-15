@@ -17,12 +17,12 @@ class SyncGroupListNotifier extends ValueNotifier<Map<int, SyncGroup>> {
     _initialize();
   }
 
-  _initialize() {
+  void _initialize() {
     _onDataChange();
     _persistenceService.addOnChangeListener(_onDataChange);
   }
 
-  _onDataChange() {
+  void _onDataChange() {
     value = _persistenceService.getAll().filterValues(
       (group) => group.configs.any(
         (config) => config.directory?.contains(_searchQuery) ?? false,
