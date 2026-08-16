@@ -70,6 +70,14 @@ to the `StorageSource` enum (`model/storage_source.dart`) and to
 `StorageSourceUi` (`ui/page/storage_form/config/storage_source_ui.dart`) with a
 config form widget. Nothing else should need to change.
 
+## Code style
+
+- Names do the explaining. Write a comment only for a constraint the code
+  cannot express (a why, an invariant, a warning); never to restate what the
+  code does. If a comment explains *what*, rename things until it isn't needed.
+- Don't echo a parameter's type in a method name:
+  `SynchronizationJob.from(SyncGroup group)`, not `forGroup(SyncGroup group)`.
+
 ## Commands
 
 ```sh

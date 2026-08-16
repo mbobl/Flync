@@ -43,6 +43,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  file: ^7.0.0 # MemoryFileSystem for engine-test fakes
   build_runner: ^2.4.15
   freezed: ^3.2.5
   json_serializable: ^6.9.4

@@ -17,8 +17,8 @@ class SimpleSyncService extends SyncService {
     }
 
     try {
-      await SynchronizationJob(group).synchronize();
-      final snapshot = await SynchronizationJob(group).createSnapshot();
+      await SynchronizationJob.from(group).synchronize();
+      final snapshot = await SynchronizationJob.from(group).createSnapshot();
       return group.copyWith(
         fileSnapshot: snapshot,
         status: SyncStatus.synchronized,

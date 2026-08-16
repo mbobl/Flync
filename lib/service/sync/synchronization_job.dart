@@ -14,11 +14,18 @@ class SynchronizationJob {
   var _secondFiles = <FileMetadata>{};
   var _includeModifyInEqualityComparison = true;
 
+  SynchronizationJob(
+    this._protocol1,
+    this._protocol2,
+    Set<FileMetadata>? fileSnapshot,
+  ) : _fileSnapshot = fileSnapshot ?? {};
+
   //TODO: Refactor pair to group
-  SynchronizationJob(SyncGroup group)
-    : _protocol1 = group.configs[0].source.client(config: group.configs[0]),
-      _protocol2 = group.configs[1].source.client(config: group.configs[1]),
-      _fileSnapshot = group.fileSnapshot ?? {};
+  factory SynchronizationJob.from(SyncGroup group) => SynchronizationJob(
+    group.configs[0].source.client(config: group.configs[0]),
+    group.configs[1].source.client(config: group.configs[1]),
+    group.fileSnapshot,
+  );
 
   Future<void> synchronize() async {
     await _protocol1.connect();
